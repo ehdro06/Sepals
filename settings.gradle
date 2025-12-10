@@ -14,4 +14,6 @@ rootProject.name = 'sepals'
 
 include 'common'
 include 'fabric'
-include 'neoforge'
+
+// TODO resume when failed to configuration be solved
+//include 'neoforge'

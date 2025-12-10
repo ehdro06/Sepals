@@ -24,7 +24,7 @@ import java.util.Set;
 
 public class SepalsConfig {
     private static final Logger LOGGER = LogManager.getLogger("SepalsConfig");
-    private static final File CONFIG_FILE = new File("config/sepals.json");
+    private final File configFile;
     public static final SepalsConfigKey FORCE_ENABLE_SEPALS_POI = SepalsConfigKey.create("forceEnableSepalsPoi", false, enabled -> {
         if (enabled) {
             SepalsPointOfInterestStorage.onRequiredSepalsGetInChunk();
@@ -41,7 +41,11 @@ public class SepalsConfig {
     public static final SepalsConfigKey ENABLE_SEPALS_QUICK_CAN_BE_PUSH_BY_ENTITY_PREDICATE = SepalsConfigKey.create("enableSepalsQuickCanBePushByEntityPredicate", true);
     public static final SepalsConfigKey ENABLE_SEPALS_REGISTRY_PROBE = SepalsConfigKey.create("enableSepalsRegistryProbe", true);
 
-    private final Map<String, Boolean> config = new Object2BooleanArrayMap<>();
+    private final Map<String, Boolean> configs = new Object2BooleanArrayMap<>();
+
+    public SepalsConfig() {
+        this.configFile = new File("config/sepals.json");
+    }
 
     public boolean isForceEnableSepalsPoi() {
         return getConfig(FORCE_ENABLE_SEPALS_POI);
@@ -88,11 +92,11 @@ public class SepalsConfig {
     }
 
     public void setConfig(SepalsConfigKey configKey, boolean value) {
-        this.config.put(configKey.name(), value);
+        this.configs.put(configKey.name(), value);
     }
 
     public void setConfig(SepalsConfigKey configKey, Map<String, Boolean> map) {
-        this.config.put(configKey.name(), getOrDefault(configKey, map));
+        this.configs.put(configKey.name(), getOrDefault(configKey, map));
     }
 
     private boolean getOrDefault(SepalsConfigKey configKey, Map<String, Boolean> map) {
@@ -104,7 +108,7 @@ public class SepalsConfig {
     }
 
     public boolean getConfig(@NotNull SepalsConfigKey configKey) {
-        Boolean value = this.config.get(configKey.name());
+        Boolean value = this.configs.get(configKey.name());
         if (value == null) {
             return configKey.value();
         }
@@ -115,7 +119,7 @@ public class SepalsConfig {
         loadAsDefault();
 
         try {
-            final Map<String, Boolean> config = toMap(IOUtil.read(new FileReader(CONFIG_FILE, StandardCharsets.UTF_8)));
+            final Map<String, Boolean> config = toMap(IOUtil.read(new FileReader(configFile, StandardCharsets.UTF_8)));
 
             setConfig(FORCE_ENABLE_SEPALS_POI, config);
             setConfig(ENABLE_SEPALS_VILLAGER, config);
@@ -171,17 +175,17 @@ public class SepalsConfig {
 
     public void write() {
         try {
-            if (!CONFIG_FILE.getParentFile().exists()) {
-                CONFIG_FILE.getParentFile().mkdirs();
+            if (!configFile.getParentFile().exists()) {
+                configFile.getParentFile().mkdirs();
             }
             JsonObject json = new JsonObject();
 
-            for (Map.Entry<String, Boolean> entry : this.config.entrySet()) {
+            for (Map.Entry<String, Boolean> entry : this.configs.entrySet()) {
                 json.addProperty(entry.getKey(), entry.getValue());
             }
 
             IOUtil.write(
-                    new FileWriter(CONFIG_FILE, StandardCharsets.UTF_8),
+                    new FileWriter(configFile, StandardCharsets.UTF_8),
                     json.toString()
             );
         } catch (Exception e) {

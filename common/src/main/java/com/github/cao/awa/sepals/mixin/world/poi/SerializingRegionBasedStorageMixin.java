@@ -17,8 +17,8 @@ import net.minecraft.world.HeightLimitView;
 import net.minecraft.world.poi.PointOfInterest;
 import net.minecraft.world.poi.PointOfInterestStorage;
 import net.minecraft.world.poi.PointOfInterestType;
-import net.minecraft.world.storage.ChunkPosKeyedStorage;
 import net.minecraft.world.storage.SerializingRegionBasedStorage;
+import net.minecraft.world.storage.VersionedChunkStorage;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -72,7 +72,7 @@ public abstract class SerializingRegionBasedStorageMixin<R> implements RegionBas
             order = Integer.MAX_VALUE
     )
     private void init(
-            ChunkPosKeyedStorage storageAccess,
+            VersionedChunkStorage storageAccess,
             Codec codec,
             Function serializer,
             BiFunction deserializer,

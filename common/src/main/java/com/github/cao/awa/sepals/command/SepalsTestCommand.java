@@ -4,6 +4,7 @@ import com.github.cao.awa.sepals.Sepals;
 import com.github.cao.awa.sepals.config.SepalsConfig;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import net.minecraft.command.DefaultPermissions;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -27,7 +28,7 @@ public class SepalsTestCommand {
                             );
                             return 0;
                         })
-                        .requires(context -> context.hasPermissionLevel(4))
+                        .requires(context -> context.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
                         .then(
                                 literal("explosion").then(
                                         argument("count", IntegerArgumentType.integer()).executes(context -> {

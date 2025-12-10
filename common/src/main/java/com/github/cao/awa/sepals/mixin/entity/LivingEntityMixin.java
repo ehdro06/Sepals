@@ -13,8 +13,8 @@ import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.rule.GameRules;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,7 +40,7 @@ public abstract class LivingEntityMixin extends Entity {
     )
     public void sepalsCramming(CallbackInfo ci) {
         if (getEntityWorld() instanceof ServerWorld serverWorld && Sepals.CONFIG.isEnableSepalsEntitiesCramming()) {
-            int maxCramming = serverWorld.getGameRules().getInt(GameRules.MAX_ENTITY_CRAMMING);
+            int maxCramming = serverWorld.getGameRules().getValue(GameRules.MAX_ENTITY_CRAMMING);
             int crammingLimit = maxCramming - 1;
 
             Predicate<Entity> canBePushedByPredicate;

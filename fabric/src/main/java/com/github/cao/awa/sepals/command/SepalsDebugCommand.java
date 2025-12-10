@@ -8,6 +8,7 @@ import com.github.cao.awa.sepals.entity.ai.task.composite.SepalsCompositeTask;
 import com.github.cao.awa.sepals.entity.ai.task.composite.SepalsTaskStatus;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.DefaultPermissions;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -28,7 +29,9 @@ public class SepalsDebugCommand {
         server.getCommandManager()
                 .getDispatcher()
                 .register(
-                        CommandManager.literal("debugs").requires(serverCommandSource -> serverCommandSource.hasPermissionLevel(4)).then(
+                        CommandManager.literal("debugs")
+                                .requires(context -> context.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
+                                .then(
                                         CommandManager.literal("tasks").then(
                                                 CommandManager.literal("all").then(
                                                                 CommandManager.argument("target", EntityArgumentType.entity())

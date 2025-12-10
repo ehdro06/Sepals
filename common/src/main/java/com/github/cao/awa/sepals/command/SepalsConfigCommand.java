@@ -9,6 +9,7 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.command.DefaultPermissions;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
@@ -29,7 +30,7 @@ public class SepalsConfigCommand {
                             );
                             return 0;
                         })
-                        .requires(context -> context.hasPermissionLevel(4))
+                        .requires(context -> context.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS))
                         .then(createConfigNode(SepalsConfig.FORCE_ENABLE_SEPALS_POI))
                         .then(createConfigNode(SepalsConfig.ENABLE_SEPALS_VILLAGER))
                         .then(createConfigNode(SepalsConfig.ENABLE_SEPALS_FROG_LOOK_AT))
