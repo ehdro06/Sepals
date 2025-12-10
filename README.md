@@ -6,6 +6,21 @@ We recommended using Sepals with [lithium](https://modrinth.com/mod/lithium) and
 
 ![](https://count.getloli.com/@@cao-awa.sepals?name=%40cao-awa.sepals&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto)
 
+## Foreword
+First, 
+the Sepals is a collection of highly experimental server-side optimizations that target very specific performance bottlenecks in Minecraft’s AI, entity processing, and task systems. Instead of providing broad “general” optimizations like Lithium, Sepals focuses on deep rewrites of a few extremely expensive vanilla mechanisms — especially villager brains, frog behavior, entity cramming, target filtering, and nearby-entity sensing.
+
+### So what does it do in practice?
+
+If you run large farms, villager halls, dense mob enclosures,
+or any scenario with hundreds/thousands of entities in a small area, 
+Sepals drastically lowers tick time by avoiding vanilla’s most expensive AI operations.
+
+If you’re running a normal SMP with small farms, you probably won’t notice much difference.
+
+It is experimental, and not every optimization is guaranteed 100% vanilla-accurate, 
+but in performance-stress tests, the gains can be huge.
+
 ## Compatibility
 
 Currently, sepals are compatible with almost all mods (~~if no new issue opened~~).
@@ -25,6 +40,10 @@ Here is the verified mod list with the latest Sepals version:
 
 If you don't know which version to choose, please use the latest version of all the optimization mods, Sepals will
 ensure compatibility with them.
+
+### Important
+Sepals won't be to support any old versions and snapshot versions of Minecraft, 
+all bug fixes and features are only available in the newest version. 
 
 ### Specially
 
