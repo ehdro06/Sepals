@@ -116,7 +116,7 @@ public abstract class WorldMixin implements BoxedEntitiesCache {
 
             List<Entity> cached = cachedGetByType(cacheKey);
 
-            if (cached == null) {
+            if (cached == null || cached.isEmpty()) {
                 return;
             }
 

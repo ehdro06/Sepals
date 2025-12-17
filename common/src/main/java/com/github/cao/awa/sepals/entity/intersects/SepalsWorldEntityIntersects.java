@@ -79,7 +79,7 @@ public class SepalsWorldEntityIntersects {
         action.accept(entity);
 
         if (this.crammingCount > crammingLimit) {
-            action.accept(entity);
+            crammingAction.accept(entity);
         }
     }
 }
