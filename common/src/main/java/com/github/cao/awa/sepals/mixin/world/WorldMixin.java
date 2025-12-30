@@ -125,6 +125,8 @@ public abstract class WorldMixin implements BoxedEntitiesCache {
             );
 
             List<T> result = (List<T>) catheter
+                    // TODO check entity type.
+                    .filter(entity -> filter.getBaseClass() == entity.getClass())
                     .filter(predicate)
                     .varyTo(entity -> Manipulate.supply(() -> filter.downcast(entity)))
                     .exists()
