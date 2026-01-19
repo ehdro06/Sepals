@@ -2,24 +2,28 @@
 
 An extremely radical and experimental optimization mod for Minecraft server performances.
 
-We recommend using Sepals with [Lithium](https://modrinth.com/mod/lithium) and [Async](https://modrinth.com/mod/async) for optimal performance.
+We recommend using Sepals with [Lithium](https://modrinth.com/mod/lithium) and [Async](https://modrinth.com/mod/async)
+for optimal performance.
 
 ![](https://count.getloli.com/@@cao-awa.sepals?name=%40cao-awa.sepals&theme=rule34&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto)
 
 ## Foreword
 
-First, 
-the Sepals is a collection of highly experimental server-side optimizations that target very specific performance bottlenecks in Minecraft’s AI, entity processing, and task systems. Instead of providing broad “general” optimizations like Lithium, Sepals focuses on deep rewrites of a few extremely expensive vanilla mechanisms — especially villager brains, frog behavior, entity cramming, target filtering, and nearby-entity sensing.
+First,
+the Sepals is a collection of highly experimental server-side optimizations that target very specific performance
+bottlenecks in Minecraft’s AI, entity processing, and task systems. Instead of providing broad “general” optimizations
+like Lithium, Sepals focuses on deep rewrites of a few extremely expensive vanilla mechanisms — especially villager
+brains, frog behavior, entity cramming, target filtering, and nearby-entity sensing.
 
 ### So what does it do in practice?
 
 If you run large farms, villager halls, dense mob enclosures,
-or any scenario with hundreds/thousands of entities in a small area, 
+or any scenario with hundreds/thousands of entities in a small area,
 Sepals drastically lowers tick time by avoiding Vanilla’s most expensive AI operations.
 
 If you’re running a normal SMP with small farms, you probably won’t notice much of a difference.
 
-It is experimental, and not every optimization is guaranteed to have Vanilla parity, 
+It is experimental, and not every optimization is guaranteed to have Vanilla parity,
 but in performance-stress tests, the gains can be huge.
 
 ## Compatibility
@@ -28,24 +32,26 @@ Currently, Sepals is compatible with nearly all mods.
 
 Here is the verified mod list with the latest Sepals version:
 
-|                                            Target mod | Required target version | 
-|------------------------------------------------------:|:-----------------------:|
-|             [Sodium](https://modrinth.com/mod/sodium) |           all           |  
-|                 [Iris](https://modrinth.com/mod/iris) |           all           |   
-|  [FerriteCore](https://modrinth.com/mod/ferrite-core) |           all           |    
-|           [Krypton](https://modrinth.com/mod/krypton) |           all           | 
-|           [Lithium](https://modrinth.com/mod/lithium) |        >=0.21.2         |   
-|          [C2ME](https://modrinth.com/mod/c2me-fabric) |      \>=0.3.6.0.0       |        
+|                                           Target mod | Required target version | 
+|-----------------------------------------------------:|:-----------------------:|
+|            [Sodium](https://modrinth.com/mod/sodium) |           all           |  
+|                [Iris](https://modrinth.com/mod/iris) |           all           |   
+| [FerriteCore](https://modrinth.com/mod/ferrite-core) |           all           |    
+|          [Krypton](https://modrinth.com/mod/krypton) |           all           | 
+|          [Lithium](https://modrinth.com/mod/lithium) |        >=0.21.2         |   
+|         [C2ME](https://modrinth.com/mod/c2me-fabric) |      \>=0.3.6.0.0       |        
 
 If you don't know which version to choose, please use the latest version of optimization mods, as Sepals will
 ensure compatibility with them.
 
 ### Important
 
-Sepals won't support any old versions and snapshot versions of Minecraft; all bug fixes and features are only available in the newest version.
+Sepals won't support any old versions and snapshot versions of Minecraft; all bug fixes and features are only available
+in the newest version.
 
 When using it with [Async](https://modrinth.com/mod/async),
-please manually compare performance with Sepals and Async, and edit their configurations, to find which optimizations are worthwhile,
+please manually compare performance with Sepals and Async, and edit their configurations, to find which optimizations
+are worthwhile,
 as each machine has different results.
 
 Sepals feature related: ```enableSepalsEntitiesCramming```.
@@ -88,12 +94,12 @@ Enabled by default
 
 1390 villagers cramming in a 7x7 space:
 
-|         Environment | tickCramming | Percent (Avg.) |
-|--------------------:|:------------:|:-------------:|
-|             Vanilla |   53.6 ms    |     100 %     |
-|             Lithium |   54.4 ms    |     101 %     |
-|              Sepals |   10.2 ms    |     19 %      |
-|    Sepals + Lithium |    8.5 ms    |     15 %      |
+|      Environment | tickCramming | Percent (Avg.) |
+|-----------------:|:------------:|:--------------:|
+|          Vanilla |   53.6 ms    |     100 %      |
+|          Lithium |   54.4 ms    |     101 %      |
+|           Sepals |   10.2 ms    |      19 %      |
+| Sepals + Lithium |    8.5 ms    |      15 %      |
 
 ### Weighted random
 
@@ -133,19 +139,19 @@ Enabled by default
 
 800 frogs cramming in a 7x7 space:
 
-|                   Environment                   | keepRunning | Percent(Avg.) |
-|:-----------------------------------------------:|:-----------:|:-------------:|
-|          Vanilla <br /> (LongJumpTask)          |   43.1 ms   |     100 %     |
-|            Lithium <br /> (LongJumpTask)        |   7.5 ms    |     17 %      |
-|          Sepals <br /> (SepalsLongJumpTask)     |   0.2 ms    |     0.4 %     |
-|    Sepals + Lithium <br /> (SepalsLongJumpTask) |   0.05 ms   |     0.1 %     |
+|                 Environment                  | keepRunning | Percent(Avg.) |
+|:--------------------------------------------:|:-----------:|:-------------:|
+|        Vanilla <br /> (LongJumpTask)         |   43.1 ms   |     100 %     |
+|        Lithium <br /> (LongJumpTask)         |   7.5 ms    |     17 %      |
+|      Sepals <br /> (SepalsLongJumpTask)      |   0.2 ms    |     0.4 %     |
+| Sepals + Lithium <br /> (SepalsLongJumpTask) |   0.05 ms   |     0.1 %     |
 
-|                   Environment                   | getTarget | Percent(Avg.) | Percent(in ```keepRunning```) |
-|:-----------------------------------------------:|:---------:|:-------------:|:-----------------------------:|
-|          Vanilla <br /> (LongJumpTask)          |  43.1 ms  |     100 %     |             100 %             |
-|            Lithium <br /> (LongJumpTask)        |  3.6 ms   |      9 %      |             48 %              |
-|          Sepals <br /> (SepalsLongJumpTask)     |  N/A ms   |      0 %      |              0 %              |
-|    Sepals + Lithium <br /> (SepalsLongJumpTask) |  N/A ms   |      0 %      |              0 %              |
+|                 Environment                  | getTarget | Percent(Avg.) | Percent(in ```keepRunning```) |
+|:--------------------------------------------:|:---------:|:-------------:|:-----------------------------:|
+|        Vanilla <br /> (LongJumpTask)         |  43.1 ms  |     100 %     |             100 %             |
+|        Lithium <br /> (LongJumpTask)         |  3.6 ms   |      9 %      |             48 %              |
+|      Sepals <br /> (SepalsLongJumpTask)      |  N/A ms   |      0 %      |              0 %              |
+| Sepals + Lithium <br /> (SepalsLongJumpTask) |  N/A ms   |      0 %      |              0 %              |
 
 ### Quick sort in NearestLivingEntitiesSensor
 
@@ -158,12 +164,12 @@ Enabled by default
 
 800 frogs cramming in a 7x7 space:
 
-|         Environment | sort (NearestLivingEntitiesSensor#sense) | Percent(Avg.) |
-|--------------------:|:----------------------------------------:|:-------------:|
-|             Vanilla |                  3.8 ms                  |     100 %     |
-|             Lithium |                  3.6 ms                  |     94 %      |
-|              Sepals |                  2.2 ms                  |     57 %      |
-|    Sepals + Lithium |                  2.2 ms                  |     57 %      |
+|      Environment | sort (NearestLivingEntitiesSensor#sense) | Percent(Avg.) |
+|-----------------:|:----------------------------------------:|:-------------:|
+|          Vanilla |                  3.8 ms                  |     100 %     |
+|          Lithium |                  3.6 ms                  |     94 %      |
+|           Sepals |                  2.2 ms                  |     57 %      |
+| Sepals + Lithium |                  2.2 ms                  |     57 %      |
 
 ### Frog attackable target filter
 
@@ -207,12 +213,12 @@ Enabled by default
 
 800 frogs cramming in a 7x7 space:
 
-|                                      Environment |  time  | Percent(Avg.) |
-|-------------------------------------------------:|:------:|:-------------:|
-|          Vanilla (FrogAttackablesSensor#matches) | 10 ms  |     100 %     |
-|          Lithium (FrogAttackablesSensor#matches) | 5.7 ms |     57 %      |
-|              Sepals (SepalsFrogBrain#attackable) | 0.1 ms |      1 %      |
-|    Sepals + Lithium (SepalsFrogBrain#attackable) | 0.1 ms |      1 %      |
+|                                   Environment |  time  | Percent(Avg.) |
+|----------------------------------------------:|:------:|:-------------:|
+|       Vanilla (FrogAttackablesSensor#matches) | 10 ms  |     100 %     |
+|       Lithium (FrogAttackablesSensor#matches) | 5.7 ms |     57 %      |
+|           Sepals (SepalsFrogBrain#attackable) | 0.1 ms |      1 %      |
+| Sepals + Lithium (SepalsFrogBrain#attackable) | 0.1 ms |      1 %      |
 
 ### Frog look-at target filter
 
@@ -234,12 +240,12 @@ Enabled by default
 
 800 frogs cramming in a 7x7 space:
 
-|                                                                          Environment | findFirst | Percent |
-|-------------------------------------------------------------------------------------:|:---------:|:-------:|
-|                         Vanilla <br /> (LookAtMobWithIntervalTask$$Lambda#findFirst) |  2.7 ms   |  100 %  |
-|                         Lithium <br /> (LookAtMobWithIntervalTask$$Lambda#findFirst) |  2.5 ms   |  92 %   |
-|              Sepals <br /> (SepalsLookAtMobWithIntervalTask$$Lambda#findFirstPlayer) |  0.1 ms   |   3 %   |
-|    Sepals + Lithium <br /> (SepalsLookAtMobWithIntervalTask$$Lambda#findFirstPlayer) |  0.1 ms   |   3 %   |
+|                                                                       Environment | findFirst | Percent |
+|----------------------------------------------------------------------------------:|:---------:|:-------:|
+|                      Vanilla <br /> (LookAtMobWithIntervalTask$$Lambda#findFirst) |  2.7 ms   |  100 %  |
+|                      Lithium <br /> (LookAtMobWithIntervalTask$$Lambda#findFirst) |  2.5 ms   |  92 %   |
+|           Sepals <br /> (SepalsLookAtMobWithIntervalTask$$Lambda#findFirstPlayer) |  0.1 ms   |   3 %   |
+| Sepals + Lithium <br /> (SepalsLookAtMobWithIntervalTask$$Lambda#findFirstPlayer) |  0.1 ms   |   3 %   |
 
 ### Villager miscellaneous optimizations
 
@@ -270,27 +276,27 @@ Enabled by default
 
 800 villagers cramming in a 7x7 space at noon:
 
-|       Environment       | Brain#tick (Total) | Percent | Brain#startTasks | Percent(startTasks) | Brain#tickSensors | Percent(tickSensors) | Brain#updateTasks | Percent(updateTasks) | Brain#tickMemories | Percent(tickMemories) |
-|:-----------------------:|:------------------:|:-------:|:----------------:|:-------------------:|:-----------------:|:--------------------:|:-----------------:|:--------------------:|:------------------:|:---------------------:|
-|         Vanilla         |       18 ms        |  100 %  |      9.3 ms      |        100 %        |      5.2 ms       |        100 %         |       3 ms        |        100 %         |       0.5 ms       |         100 %         |
-|           Lithium       |      12.4 ms       |  68 %   |      4.8 ms      |        51 %         |      5.9 ms       |        113 %         |      1.2 ms       |         40 %         |       0.5 ms       |         100 %         |
-|            Sepals       |       9.7 ms       |  53 %   |      3.6 ms      |        38 %         |      3.7 ms       |         71 %         |       2 ms        |         66 %         |       0.4 ms       |         80 %          |
-|        Sepals + Lithium |       10 ms        |  55 %   |      3.4 ms      |        36 %         |      3.7 ms       |         71 %         |      2.5 ms       |         83 %         |       0.4 ms       |         80 %          |
+|   Environment    | Brain#tick (Total) | Percent | Brain#startTasks | Percent(startTasks) | Brain#tickSensors | Percent(tickSensors) | Brain#updateTasks | Percent(updateTasks) | Brain#tickMemories | Percent(tickMemories) |
+|:----------------:|:------------------:|:-------:|:----------------:|:-------------------:|:-----------------:|:--------------------:|:-----------------:|:--------------------:|:------------------:|:---------------------:|
+|     Vanilla      |       18 ms        |  100 %  |      9.3 ms      |        100 %        |      5.2 ms       |        100 %         |       3 ms        |        100 %         |       0.5 ms       |         100 %         |
+|     Lithium      |      12.4 ms       |  68 %   |      4.8 ms      |        51 %         |      5.9 ms       |        113 %         |      1.2 ms       |         40 %         |       0.5 ms       |         100 %         |
+|      Sepals      |       9.7 ms       |  53 %   |      3.6 ms      |        38 %         |      3.7 ms       |         71 %         |       2 ms        |         66 %         |       0.4 ms       |         80 %          |
+| Sepals + Lithium |       10 ms        |  55 %   |      3.4 ms      |        36 %         |      3.7 ms       |         71 %         |      2.5 ms       |         83 %         |       0.4 ms       |         80 %          |
 
 800 villagers cramming in a 7x7 space at night:
 
-|       Environment       | Brain#tick (Total) | Percent | Brain#startTasks | Percent(startTasks) | Brain#tickSensors | Percent(tickSensors) | Brain#updateTasks | Percent(updateTasks) | Brain#tickMemories | Percent(tickMemories) |
-|:-----------------------:|:------------------:|:-------:|:----------------:|:-------------------:|:-----------------:|:--------------------:|:-----------------:|:--------------------:|:------------------:|:---------------------:|
-|         Vanilla         |      16.7 ms       |  100 %  |      8.2 ms      |        100 %        |       6 ms        |        100 %         |       2 ms        |        100 %         |       0.5 ms       |         100 %         |
-|           Lithium       |      10.2 ms       |  61 %   |      3.2 ms      |        24 %         |       6 ms        |        113 %         |      0.5 ms       |         25 %         |       0.5 ms       |         100 %         |
-|            Sepals       |        9 ms        |  53 %   |      3.3 ms      |        16 %         |      4.7 ms       |         78 %         |      0.7 ms       |         35 %         |       0.3 ms       |         60 %          |
-|        Sepals + lithium |       8.7 ms       |  52 %   |      2.9 ms      |        11 %         |      4.6 ms       |         76 %         |      0.7 ms       |         35 %         |       0.5 ms       |         100 %         |
+|   Environment    | Brain#tick (Total) | Percent | Brain#startTasks | Percent(startTasks) | Brain#tickSensors | Percent(tickSensors) | Brain#updateTasks | Percent(updateTasks) | Brain#tickMemories | Percent(tickMemories) |
+|:----------------:|:------------------:|:-------:|:----------------:|:-------------------:|:-----------------:|:--------------------:|:-----------------:|:--------------------:|:------------------:|:---------------------:|
+|     Vanilla      |      16.7 ms       |  100 %  |      8.2 ms      |        100 %        |       6 ms        |        100 %         |       2 ms        |        100 %         |       0.5 ms       |         100 %         |
+|     Lithium      |      10.2 ms       |  61 %   |      3.2 ms      |        24 %         |       6 ms        |        113 %         |      0.5 ms       |         25 %         |       0.5 ms       |         100 %         |
+|      Sepals      |        9 ms        |  53 %   |      3.3 ms      |        16 %         |      4.7 ms       |         78 %         |      0.7 ms       |         35 %         |       0.3 ms       |         60 %          |
+| Sepals + lithium |       8.7 ms       |  52 %   |      2.9 ms      |        11 %         |      4.6 ms       |         76 %         |      0.7 ms       |         35 %         |       0.5 ms       |         100 %         |
 
 ### Predicate optimization
 
 1172 frogs cramming in a 3x3 space:
 
-|                                                                                                       Environment |   time   | Percent(Avg.) |
-|------------------------------------------------------------------------------------------------------------------:|:--------:|:-------------:|
-|                                                           Vanilla (java.util.function.Predicate.lambda\$and\$0()) | 49.01 ms |     100 %     |
-|      Sepals (com.github.cao.awa.sepals.entity.predicate.SepalsEntityPredicates$$Lambda/0x000002d8f116e000.test()) | 22.6 ms  |     46 %      |
+|                                                                                                  Environment |   time   | Percent(Avg.) |
+|-------------------------------------------------------------------------------------------------------------:|:--------:|:-------------:|
+|                                                      Vanilla (java.util.function.Predicate.lambda\$and\$0()) | 49.01 ms |     100 %     |
+| Sepals (com.github.cao.awa.sepals.entity.predicate.SepalsEntityPredicates$$Lambda/0x000002d8f116e000.test()) | 22.6 ms  |     46 %      |
