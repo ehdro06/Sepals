@@ -21,7 +21,6 @@
     "registry.entry.RegistryEntryReferenceMixin",
     "server.MinecraftServerAccessor",
     "server.MinecraftServerMixin",
-    "server.chunk.ServerChunkManagerMixin",
     "world.ServerWorldMixin",
     "world.WorldAccessor",
     "world.WorldMixin",

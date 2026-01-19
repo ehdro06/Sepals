@@ -34,10 +34,8 @@ Here is the verified mod list with the latest Sepals version:
 |                 [Iris](https://modrinth.com/mod/iris) |           all           |   
 |  [FerriteCore](https://modrinth.com/mod/ferrite-core) |           all           |    
 |           [Krypton](https://modrinth.com/mod/krypton) |           all           | 
-|           [Lithium](https://modrinth.com/mod/lithium) |        >=0.18.0         |   
-|          [C2ME](https://modrinth.com/mod/c2me-fabric) |      \>=0.3.4.0.0       |        
-|     [Moonrise](https://modrinth.com/mod/moonrise-opt) | \>=0.6.0-beta.1+45edfd7 |    
-|               [Async](https://modrinth.com/mod/async) | \>=0.1.7+alpha.7-1.21.8 | 
+|           [Lithium](https://modrinth.com/mod/lithium) |        >=0.21.2         |   
+|          [C2ME](https://modrinth.com/mod/c2me-fabric) |      \>=0.3.6.0.0       |        
 
 If you don't know which version to choose, please use the latest version of optimization mods, as Sepals will
 ensure compatibility with them.
